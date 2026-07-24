@@ -13,10 +13,13 @@ Anukapah es el sitio y la plataforma privada de una terapeuta online. El alcance
 ## Fuente de verdad y forma de trabajo
 
 - El diseno proporcionado por el usuario es la fuente de verdad visual.
+- Archivo de diseno principal: `https://www.figma.com/design/quam0sIxyAxhQh397VGfuj/Anukah`.
+- El archivo de Figma contiene las referencias para Home, Contacto, Login y un frame de identidad con logo, colores y tipografias.
 - Implementar el sitio por partes, en el orden solicitado. No inventar ni adelantar pantallas que aun no fueron entregadas.
 - Antes de modificar una pantalla, revisar sus referencias, assets, textos, estados e interacciones.
 - Conservar Angular, el package manager, el lockfile, SSR y la arquitectura que ya funciona. No hacer reescrituras amplias sin una necesidad concreta.
 - Crear componentes reutilizables cuando exista repeticion real; evitar abstracciones prematuras.
+- Implementar el nav-menu como componente compartido y reutilizarlo en las paginas que lo requieran. Mantener cada variante mediante inputs, estado de ruta y CSS, sin duplicar su markup.
 
 ## Responsive y experiencia de uso
 
@@ -26,6 +29,15 @@ Anukapah es el sitio y la plataforma privada de una terapeuta online. El alcance
 - Prevenir overflow horizontal, texto ilegible, controles superpuestos y saltos visuales por imagenes sin dimensiones.
 - Mantener objetivos tactiles de al menos 44 x 44 px y estados visibles de hover, focus, active, disabled, loading, success y error cuando correspondan.
 - Respetar `prefers-reduced-motion` y no depender del hover para acceder a informacion o acciones.
+
+## Animacion definida para Home
+
+- La frase larga horizontal de Home debe animarse con GSAP y ScrollTrigger en respuesta al scroll.
+- Encapsular la animacion en el componente o directiva responsable, usar `gsap.context()` y limpiar animaciones y triggers al destruir el componente.
+- Proteger todo acceso a `window`, medidas del viewport y GSAP para conservar compatibilidad con SSR.
+- Evitar overflow horizontal en el documento; la seccion animada debe controlar su propio desplazamiento y recalcularse correctamente al cambiar el viewport.
+- Ofrecer una presentacion estatica legible cuando el usuario active `prefers-reduced-motion`.
+- Cargar GSAP solamente donde se utiliza y no instalarlo hasta comenzar la implementacion de esa seccion.
 
 ## Accesibilidad
 
