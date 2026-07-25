@@ -1,1 +1,88 @@
-<p>navbar works!</p>
+<header class="site-header">
+  <nav class="navbar" aria-label="Navegacion principal">
+    <a class="brand" routerLink="/" aria-label="Anukah Pah, ir al inicio" (click)="closeMenu()">
+      <span class="brand__logo" aria-hidden="true"></span>
+    </a>
+
+    <div class="desktop-navigation">
+      <div class="desktop-navigation__links">
+        @for (item of navigationItems; track item.path) {
+          <a
+            class="navigation-link"
+            [routerLink]="item.path"
+            routerLinkActive="navigation-link--active"
+            [routerLinkActiveOptions]="{ exact: item.exact }"
+            ariaCurrentWhenActive="page"
+          >
+            @if (item.icon === 'panel') {
+              <span class="panel-icon" aria-hidden="true"></span>
+            }
+            <span>{{ item.label }}</span>
+          </a>
+        }
+      </div>
+
+      <a class="write-button" routerLink="/contacto">
+        <span class="search-icon" aria-hidden="true"></span>
+        <span>Escribime</span>
+      </a>
+    </div>
+
+    <button
+      #menuToggle
+      class="menu-toggle"
+      type="button"
+      [class.menu-toggle--open]="menuOpen()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="mobile-navigation"
+      [attr.aria-label]="menuOpen() ? 'Cerrar menu' : 'Abrir menu'"
+      (click)="toggleMenu()"
+    >
+      <span class="menu-toggle__line" aria-hidden="true"></span>
+      <span class="menu-toggle__line" aria-hidden="true"></span>
+      <span class="menu-toggle__line" aria-hidden="true"></span>
+    </button>
+  </nav>
+
+  <button
+    class="menu-backdrop"
+    type="button"
+    tabindex="-1"
+    aria-label="Cerrar menu"
+    [class.menu-backdrop--visible]="menuOpen()"
+    [attr.aria-hidden]="!menuOpen()"
+    (click)="closeMenu(true)"
+  ></button>
+
+  <div
+    id="mobile-navigation"
+    class="mobile-navigation"
+    [class.mobile-navigation--open]="menuOpen()"
+    [attr.aria-hidden]="!menuOpen()"
+    [attr.inert]="menuOpen() ? null : ''"
+  >
+    <nav class="mobile-navigation__links" aria-label="Navegacion movil">
+      @for (item of navigationItems; track item.path) {
+        <a
+          #mobileMenuLink
+          class="mobile-navigation__link"
+          [routerLink]="item.path"
+          routerLinkActive="mobile-navigation__link--active"
+          [routerLinkActiveOptions]="{ exact: item.exact }"
+          ariaCurrentWhenActive="page"
+          (click)="closeMenu()"
+        >
+          @if (item.icon === 'panel') {
+            <span class="panel-icon panel-icon--mobile" aria-hidden="true"></span>
+          }
+          <span>{{ item.label }}</span>
+        </a>
+      }
+
+      <a class="write-button write-button--mobile" routerLink="/contacto" (click)="closeMenu()">
+        <span class="search-icon" aria-hidden="true"></span>
+        <span>Escribime</span>
+      </a>
+    </nav>
+  </div>
+</header>

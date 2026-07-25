@@ -1,0 +1,343 @@
+:host {
+  --nav-background: #551e06;
+  --nav-gold: #ce893b;
+  --nav-button: #e08a26;
+  --nav-divider: #4d1b09;
+  --nav-ink: #311206;
+
+  position: relative;
+  z-index: 1000;
+  display: block;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  color: var(--nav-gold);
+  background: var(--nav-background);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 3.5rem;
+  padding: 0 clamp(1rem, 3.2vw, 4.5rem);
+}
+
+.brand {
+  display: block;
+  width: 5.625rem;
+  height: 2.5625rem;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.brand__logo {
+  display: block;
+  width: 5.625rem;
+  height: 2.5625rem;
+  background-color: var(--nav-background);
+  background-image: url('/images/anukah-navbar-reference.png');
+  background-repeat: no-repeat;
+  background-position: -34px -7px;
+  background-size: 1251px 48px;
+}
+
+.desktop-navigation {
+  display: none;
+  align-items: center;
+}
+
+.desktop-navigation__links {
+  display: flex;
+  align-items: center;
+}
+
+.navigation-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  height: 1.75rem;
+  padding: 0 2rem;
+  color: var(--nav-gold);
+  font-family: 'Cormorant Garamond', Garamond, Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.navigation-link:first-child {
+  padding-left: 0;
+}
+
+.navigation-link + .navigation-link {
+  border-left: 1px solid var(--nav-divider);
+}
+
+.navigation-link::after {
+  position: absolute;
+  right: 2rem;
+  bottom: 0.12rem;
+  left: 2rem;
+  height: 1px;
+  background: currentcolor;
+  content: '';
+  opacity: 0;
+}
+
+.navigation-link:first-child::after {
+  left: 0;
+}
+
+.navigation-link:hover::after,
+.navigation-link--active::after {
+  opacity: 1;
+}
+
+.panel-icon {
+  position: relative;
+  display: inline-block;
+  width: 1rem;
+  height: 1.05rem;
+  flex: 0 0 auto;
+}
+
+.panel-icon::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0.42rem;
+  height: 0.42rem;
+  background: currentcolor;
+  border-radius: 50%;
+  content: '';
+  transform: translateX(-50%);
+}
+
+.panel-icon::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 0.55rem;
+  background: currentcolor;
+  border-radius: 0.5rem 0.5rem 0.15rem 0.15rem;
+  content: '';
+}
+
+.write-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.38rem;
+  width: 4.9375rem;
+  height: 1.6875rem;
+  margin-left: 2.1rem;
+  color: var(--nav-ink);
+  background: var(--nav-button);
+  border-radius: 0.375rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.625rem;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.write-button::before {
+  position: absolute;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  left: -2.1rem;
+  width: 1px;
+  background: var(--nav-divider);
+  content: '';
+}
+
+.search-icon {
+  position: relative;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1.5px solid currentcolor;
+  border-radius: 50%;
+}
+
+.search-icon::after {
+  position: absolute;
+  right: -0.2rem;
+  bottom: -0.12rem;
+  width: 0.25rem;
+  height: 1.5px;
+  background: currentcolor;
+  content: '';
+  transform: rotate(-48deg);
+  transform-origin: left center;
+}
+
+.menu-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  color: var(--nav-gold);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.menu-toggle__line {
+  display: block;
+  width: 1.35rem;
+  height: 1px;
+  background: currentcolor;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.menu-toggle--open .menu-toggle__line:first-child {
+  transform: translateY(0.375rem) rotate(45deg);
+}
+
+.menu-toggle--open .menu-toggle__line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle--open .menu-toggle__line:last-child {
+  transform: translateY(-0.375rem) rotate(-45deg);
+}
+
+.menu-backdrop {
+  position: fixed;
+  inset: 3.5rem 0 0;
+  z-index: -1;
+  padding: 0;
+  background: rgb(49 18 6 / 44%);
+  border: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.menu-backdrop--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-navigation {
+  position: fixed;
+  inset: 3.5rem 0 0;
+  z-index: 1;
+  padding: clamp(2rem, 8vh, 5rem) clamp(1.5rem, 7vw, 4rem);
+  overflow-y: auto;
+  background: var(--nav-background);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-0.75rem);
+  transition:
+    opacity 180ms ease,
+    transform 220ms ease,
+    visibility 0s linear 220ms;
+}
+
+.mobile-navigation--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.mobile-navigation__links {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 36rem);
+  margin: 0 auto;
+}
+
+.mobile-navigation__link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 4.5rem;
+  color: var(--nav-gold);
+  border-bottom: 1px solid var(--nav-divider);
+  font-family: 'Cormorant Garamond', Garamond, Georgia, serif;
+  font-size: clamp(2.35rem, 9vw, 4rem);
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.mobile-navigation__link--active {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3rem;
+}
+
+.panel-icon--mobile {
+  width: 1.5rem;
+  height: 1.6rem;
+}
+
+.panel-icon--mobile::before {
+  width: 0.62rem;
+  height: 0.62rem;
+}
+
+.panel-icon--mobile::after {
+  height: 0.8rem;
+}
+
+.write-button--mobile {
+  width: min(100%, 13rem);
+  height: 3rem;
+  margin: 2.25rem 0 0;
+  border-radius: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.write-button--mobile::before {
+  display: none;
+}
+
+.brand:focus-visible,
+.navigation-link:focus-visible,
+.write-button:focus-visible,
+.menu-toggle:focus-visible,
+.mobile-navigation__link:focus-visible {
+  outline: 2px solid var(--nav-button);
+  outline-offset: 3px;
+}
+
+@media (min-width: 68.75rem) {
+  .navbar {
+    height: 3rem;
+  }
+
+  .desktop-navigation {
+    display: flex;
+  }
+
+  .menu-toggle,
+  .menu-backdrop,
+  .mobile-navigation {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-toggle__line,
+  .mobile-navigation {
+    transition: none;
+  }
+}
